@@ -1,7 +1,13 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import util
+
 util.load_saved_artifacts()
-app = Flask(__name__)
+
+app = Flask(__name__, static_folder="client", static_url_path="")
+
+@app.route('/')
+def home():
+    return send_from_directory('client', 'index.html')
 
 @app.route('/get_location_names')
 def get_location_names():
