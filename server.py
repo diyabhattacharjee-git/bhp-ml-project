@@ -3,11 +3,11 @@ import util
 
 util.load_saved_artifacts()
 
-app = Flask(__name__, static_folder="client")
+app = Flask(__name__, static_folder="client", static_url_path="")
 
 @app.route('/')
 def home():
-    return send_from_directory('client', 'index.html')
+    return app.send_static_file('index.html')
 
 @app.route('/get_location_names')
 def get_location_names():
@@ -35,3 +35,4 @@ if __name__ == '__main__':
     print("Starting python Flask server for Home Price Prediction...")
 
     app.run()
+
